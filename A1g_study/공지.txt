@@ -1,14 +1,13 @@
 오늘의 알고리즘 스터디💯
 
-https://youtu.be/m-9pAwq1o3w?t=5350
+https://youtu.be/m-9pAwq1o3w?t=7103
 
-8강: 파이썬 문법 - 조건문 01:29:10
-9강: 파이썬 문법 - 반복문 01:48:18
+10강: 파이썬 문법 - 함수와 람다 표현식 01:58:23
+11강: 파이썬 문법 - 자주 사용되는 표준 라이브러리 02:13:14
 듣기
 
 오늘의 문제🤔
-https://www.acmicpc.net/problem/2884
-https://www.acmicpc.net/problem/2742 - for/while 둘다 해보기!!
+https://www.acmicpc.net/problem/1065
 
 궁금한거 안되는거 질문
 아무나 대답

@@ -47,9 +47,11 @@ for i in range(0, len(nums)):
 # N이 주어졌을 때, 1보다 크거나 같고, N보다 작거나 같은 한수의 개수를 출력하는 프로그램을 작성하시오.
 
 def judge(x):
-    str_x = str(x)
-    for i in range(1, len(str_x)-1):
-        if (int(str_x[i+1]) - int(str_x[i])) != int(str_x[i]) - int(str_x[i-1]):
+    if x < 100:
+        return True
+    num_list = list(map(int,str(x)))
+    for i in range(1, len(num_list)-1):
+        if (int(num_list[i+1]) - int(num_list[i])) != int(num_list[i]) - int(num_list[i-1]):
             return False
     return True
 
