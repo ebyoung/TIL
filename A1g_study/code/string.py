@@ -1,20 +1,13 @@
 # 1316
-# n = int(input())
-# count = 0
-# for _ in range(n):
-#     word = input()
-#     prev_char = word[0]
-#     already_used = []
-#     for char in word:
-#         if prev_char == char:
-#             continue
-#         else:
-#             if char in already_used:
-#                 break
-#             else:
-#                 already_used.append(prev_char)
-#                 prev_char = char
-#     else:
-#         count += 1
+n = int(input())
+result = 0
+for _ in range(n):
+    word = input()
+    for i in range(len(word)-1):
+        if word[i] != word[i+1]:
+            if word[i] in word[i+1:]:
+                break
+    else:
+        result += 1
 
-# print(count)
+print(result)
