@@ -1,6 +1,20 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/windows,python
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,python
+# Created by https://www.toptal.com/developers/gitignore/api/jupyternotebooks,python,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=jupyternotebooks,python,visualstudiocode
+
+### JupyterNotebooks ###
+# gitignore template for Jupyter Notebooks
+# website: http://jupyter.org/
+
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Remove previous ipynb_checkpoints
+#   git rm -r .ipynb_checkpoints/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -81,11 +95,8 @@ docs/_build/
 target/
 
 # Jupyter Notebook
-.ipynb_checkpoints
 
 # IPython
-profile_default/
-ipython_config.py
 
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
@@ -156,30 +167,25 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-### Windows ###
-# Windows thumbnail cache files
-Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
 
-# Dump file
-*.stackdump
+# Local History for Visual Studio Code
+.history/
 
-# Folder config file
-[Dd]esktop.ini
+# Built Visual Studio Code Extensions
+*.vsix
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
 
-# Windows Installer files
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
+# Support for Project snippet scope
 
-# Windows shortcuts
-*.lnk
-
-# End of https://www.toptal.com/developers/gitignore/api/windows,python
+# End of https://www.toptal.com/developers/gitignore/api/jupyternotebooks,python,visualstudiocode
