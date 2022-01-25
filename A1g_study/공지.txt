@@ -1,13 +1,13 @@
 오늘의 알고리즘 스터디💯
 
-https://youtu.be/2zjoKjt97vQ?t=1698
+https://youtu.be/7C9RgOcvkvo
 
-14강: 구현 유형 개요 00:28:18
-15강: 구현 유형 문제 풀이 00:41:22
+16강: 스택과 큐 자료구조 00:00:00
+17강: 재귀 함수 00:13:51
 듣기
 
 오늘의 문제🤔
-https://www.acmicpc.net/problem/2798
+https://www.acmicpc.net/problem/10870
 
 궁금한거 안되는거 질문
 아무나 대답
