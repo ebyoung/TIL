@@ -1,13 +1,14 @@
 오늘의 알고리즘 스터디💯
 
-https://youtu.be/7C9RgOcvkvo
+https://youtu.be/KGyK-pNvWos
 
-16강: 스택과 큐 자료구조 00:00:00
-17강: 재귀 함수 00:13:51
+21강: 선택 정렬 00:00:00
+22강: 삽입 정렬 00:08:10
+23강: 퀵 정렬 00:15:34
 듣기
 
 오늘의 문제🤔
-https://www.acmicpc.net/problem/10870
+https://www.acmicpc.net/problem/2750
 
 궁금한거 안되는거 질문
 아무나 대답
