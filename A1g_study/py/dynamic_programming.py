@@ -66,3 +66,39 @@
 #     if (a == -1) and (b == -1) and (c == -1):
 #         break
 #     print(f'w({a}, {b}, {c}) = {w(a, b, c)}')
+
+
+# 11053
+# n = int(input())
+# array = list(map(int, input().split()))
+
+# def lis(array, d):
+#     for i in range(1, len(array)):
+#         for j in range(0, i):
+#             if array[j] < array[i]:
+#                 d[i] = max(d[i], d[j] + 1)
+#     return max(d)
+
+# d = [1] * n
+# print(lis(array, d))
+
+
+# 11054
+n = int(input())
+array = list(map(int, input().split()))
+
+dp = []
+inc = [1] * n
+dec = [1] * n
+for i in range(0, n):
+    for j in range(0, i):
+        if array[j] < array[i]:
+            inc[i] = max(inc[i], inc[j] + 1)
+    for j in range(i, n):
+        if array[j] < array[i]:
+            dec[i] = max(dec[i], dec[j] + 1)
+
+print(inc, dec)
+
+
+print(dp)
