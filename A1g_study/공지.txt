@@ -14,9 +14,9 @@ https://youtu.be/5Lu34WIx2Us?t=3150
 오늘의 알고리즘 스터디💯
 
 오늘의 문제🤔
-https://www.acmicpc.net/problem/1003
-https://www.acmicpc.net/problem/9184
-탑다운 바텀업 둘다 해보면 더 좋음
+https://www.acmicpc.net/problem/11054
+https://www.acmicpc.net/problem/12865
+
 
 궁금한거 안되는거 질문
 아무나 대답

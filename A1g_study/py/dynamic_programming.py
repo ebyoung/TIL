@@ -84,21 +84,49 @@
 
 
 # 11054
-n = int(input())
-array = list(map(int, input().split()))
+# n = int(input())
+# array = list(map(int, input().split()))
+# array_rev = list(reversed(array))
 
-dp = []
-inc = [1] * n
-dec = [1] * n
-for i in range(0, n):
-    for j in range(0, i):
-        if array[j] < array[i]:
-            inc[i] = max(inc[i], inc[j] + 1)
-    for j in range(i, n):
-        if array[j] < array[i]:
-            dec[i] = max(dec[i], dec[j] + 1)
+# dp = []
+# inc = [1] * n
+# dec = [1] * n
+# for i in range(0, n):
+#     for j in range(0, i):
+#         if array[j] < array[i]:
+#             inc[i] = max(inc[i], inc[j] + 1)
 
-print(inc, dec)
+#     for j in range(0, i):
+#         if array_rev[j] < array_rev[i]:
+#             dec[i] = max(dec[i], dec[j] + 1)
+
+# dec.reverse()
+# print(inc, dec)
+# for i in range(0, n):
+#     dp.append(inc[i] + dec[i] - 1)
 
 
-print(dp)
+# print(max(dp))
+
+# # 증가 감소(뒤에서 부터 증가) 나눠서
+# n = int(input())
+# array = list(map(int, input().split()))
+# increase = [1 for _ in range(n)]
+# decrease = [1 for _ in range(n)]
+# dp = []
+
+# # increse
+# for i in range(n):
+#     for j in range(i):
+#         if array[j] < array[i]:
+#             increase[i] = max(increase[i], increase[j] + 1)
+# # decrease
+# for i in range(n-1, -1, -1):
+#     for j in range(n-1, i, -1):
+#         if array[i] > array[j]:
+#             decrease[i] = max(decrease[i], decrease[j] + 1)
+
+# for i in range(n):
+#     dp.append(increase[i] + decrease[i] - 1)
+
+# print(max(dp))
