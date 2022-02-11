@@ -149,27 +149,47 @@
 
 
 # 2477 참외밭
-# 입력 받아서 딕셔너리로 저장
-n = int(input())
-lengths = {}
-for i in range(6):
-    direction, length = map(int, input().split())
-    if lengths.get(direction):
-        lengths[direction].append((i, length))
-    else:
-        lengths[direction] = [(i, length)]
-
-# 움푹 들어간 넓이 구하기
-short_side = []
-long_side = []
-for direction in lengths:
-    if len(lengths[direction]) == 2:
-        short_side.extend(lengths[direction])
-
-
+# 입력 받아서 리스트로 저장
+# k = int(input())
+# lengths = []
+# for i in range(6):
+#     direction, length = map(int, input().split())
+#     lengths.append(length)
+# '''
+# 1. 방향 정보를 어떻게 활용해야 하는지 모르겠다ㅠ
+# 2. 가장 긴 변을 위쪽에 두면 결국 모양은 둘 중 하나
+#       가장 긴 변            가장 긴 변
+#     _____________         ______________
+#  -1 |_______    | +1   -1 |    ________| +1
+#      -2  -3 |___|         |___| +3  +2
+# '''
+# max_idx = lengths.index(max(lengths))
+# left = lengths[max_idx-1]
+# right = lengths[(max_idx+1) % 6]
+# if left > right: # 왼쪽과 오른쪽 중 더 긴 변을 확인
+#     big_square = lengths[max_idx] * lengths[max_idx - 1]
+#     small_square = lengths[(max_idx + 2) % 6] * lengths[(max_idx + 3) % 6]
+#     print(k * (big_square - small_square))
+# else:
+#     big_square = lengths[max_idx] * lengths[(max_idx + 1) % 6]
+#     small_square = lengths[(max_idx - 2)] * lengths[(max_idx - 3)]
+#     print(k * (big_square - small_square))
 
 
 # 2491 수열
+n = int(input())                            # 입력 받기
+array = list(map(int, input().split()))
+increasing = [1] * n                        # 연속해서 커지는 수열을 기록하기 위한 리스트
+decreasing = [1] * n                        # 연속해서 작아지는 수열을 기록하기 위한 리스트
+for i in range(1, n):
+    if array[i] >= array[i-1]:              # 이전 값보다 크거나 같으면
+        increasing[i] = increasing[i-1] + 1 # 증가 수열 리스트에 기록
+    if array[i] <= array[i-1]:              # 이전 값보다 작거나 같으면
+        decreasing[i] = decreasing[i-1] + 1 # 감소 수열 리스트에 기록
+
+print(max(max(decreasing), max(increasing)))
+
+
 # 2527 색종이
 # 2559 경비원
 # 2563 빙고 
