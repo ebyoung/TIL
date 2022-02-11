@@ -130,3 +130,36 @@
 #     dp.append(increase[i] + decrease[i] - 1)
 
 # print(max(dp))
+
+
+# 9461
+# 탑다운
+# t = int(input())
+
+# dp = [0] * 101
+# dp[0] = dp[1] = dp[2] = dp[3] = 1
+# dp[4] = dp[5] = 2
+
+# def padovan(n, dp=dp):
+#     if not dp[n]:
+#         dp[n] = padovan(n-1) + padovan(n-5)
+
+#     return dp[n]
+        
+# for _ in range(t):
+#     n = int(input())
+#     print(padovan(n))
+
+# 바텀업
+# t = int(input())
+# dp = []
+# for i in range(100):
+#     if i < 3:
+#         dp.append(1)
+#     elif i < 5:
+#         dp.append(2)
+#     else:
+#         dp.append(dp[i-1] + dp[i-5])
+
+# for _ in range(t):
+#     print(dp[int(input())-1])
