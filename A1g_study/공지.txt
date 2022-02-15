@@ -7,7 +7,8 @@ https://youtu.be/acqm9mM1P6o?t=1244
 간단한 구현 방법 성능 분석 부터(00:20:44~)
 개선된 구현 방법 성능 분석 까지(~00:43:24)
 
-힙이 뭔지 궁금한 사람
+
+힙이 뭔지 궁금한 사람은
 https://youtu.be/AjFlp951nz0
 
 자료구조: 우선순위 큐(Priority Queue)와 힙(Heap) 10분 핵심 요약
@@ -20,8 +21,7 @@ https://youtu.be/AjFlp951nz0
 오늘의 알고리즘 스터디💯
 
 오늘의 문제🤔
-https://www.acmicpc.net/problem/11054
-https://www.acmicpc.net/problem/9461
+https://www.acmicpc.net/problem/1753
 
 궁금한거 안되는거 질문
 아무나 대답
