@@ -25,4 +25,3 @@ def manacher(s):                # 입력: 문자열
             c = i
 
     return p
-
