@@ -3,7 +3,6 @@
 오늘의 강의💻
 https://youtu.be/aOhhNFTIeFI?t=1302
 
-
 35강: 크루스칼 알고리즘 00:21:42
 36강: 위상 정렬 00:33:06
 
@@ -16,7 +15,7 @@ https://youtu.be/aOhhNFTIeFI?t=1302
 오늘의 알고리즘 스터디💯
 
 오늘의 문제🤔
-https://www.acmicpc.net/problem/1717
+https://www.acmicpc.net/problem/1197
 
 궁금한거 안되는거 질문
 아무나 대답
