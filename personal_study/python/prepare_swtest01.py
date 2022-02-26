@@ -197,17 +197,76 @@ print(max(max(decreasing), max(increasing)))
 '''
 
 # 2527 직사각형
-def check(s1, s2):
-    array = [[0] * 50001 for _ in range(50001)]
+# 모든 경우를 고려
+# 항상 왼쪽 아래와 오른쪽 위의 점을 준다는 점을 활용하지 못해서 많이 틀렸다.
+'''
+def check(data):
+    # 안겹치는 경우 확인
+    if data[2] < data[4] or data[3] < data[5] or data[0] > data[6] or data[1] > data[7]:
+        return 'd'
+
+    # 선인지 확인
+    if data[0] == data[6] or data[2] == data[4]:
+        # 점인지 확인
+        if data[1] == data[7] or data[3] == data[5]:
+            return 'c'
+        else:
+            return 'b'
+    elif data[1] == data[7] or data[3] == data[5]:
+        return 'b'
+
+    return 'a'
 
 for _ in range(4):
     data = list(map(int, input().split()))
-    print(check(data[:4], data[4:]))
-
-
-
-
+    print(check(data))
+'''
 
 # 2559 수열
+# 뒤를 더하고 앞을 빼기
+# 쉽게 생각했더니 시간초과ㅠ
+'''
+n, k = map(int, input().split())
+data = list(map(int, input().split()))
+total = 0
+for i in range(k):
+    total += data[i]
+    result = total
+
+for i in range(0, n-k):
+    total = total - data[i] + data[i+k]
+    result = max(result, total)
+print(result)
+'''
+
 # 2563 색종이
+# 그냥 도화지를 만들어서 칠했다.
+'''
+n = int(input())
+array = [[0 for _ in range(100)] for _ in range(100)]
+for _ in range(n):
+    x, y = map(int, input().split())
+    for i in range(10):
+        for j in range(10):
+            array[x+i][y+j] = 1
+
+print(sum(map(sum, array)))
+'''
+
 # 2564 경비원
+#
+#
+left = [1, 3, 2, 4]
+right = [1, 4, 2, 3]
+r, c = map(int, input().split())
+n = int(input())
+store = []
+for _ in range(n):
+    x, y = map(int, input().split())
+    store.append((x, y))
+
+dg = list(map(int, input().split()))
+result = [0] * n
+
+
+
