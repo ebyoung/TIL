@@ -198,7 +198,7 @@ print(max(max(decreasing), max(increasing)))
 
 # 2527 직사각형
 # 모든 경우를 고려
-# 항상 왼쪽 아래와 오른쪽 위의 점을 준다는 점을 활용하지 못해서 많이 틀렸다.
+# 항상 왼쪽 아래와 오른쪽 위의 점을 준다는 점을 활용하지 못해서 여러번 틀렸다.
 '''
 def check(data):
     # 안겹치는 경우 확인
@@ -254,10 +254,9 @@ print(sum(map(sum, array)))
 '''
 
 # 2564 경비원
-#
-#
-left = [1, 3, 2, 4]
-right = [1, 4, 2, 3]
+# 모르겠다 무식하게...
+# 가장 가까운 상점과의 거리를 구해서 틀렸다. 문제를 잘 읽어보자
+'''
 r, c = map(int, input().split())
 n = int(input())
 store = []
@@ -266,7 +265,44 @@ for _ in range(n):
     store.append((x, y))
 
 dg = list(map(int, input().split()))
-result = [0] * n
+result = 0
 
+for xy in store:
+    if dg[0] == xy[0]:
+        result += abs(dg[1] - xy[1])
 
+    if dg[0] == 1:
+        if xy[0] == 2:
+            result += min(dg[1] + xy[1] + c, r * 2 - dg[1] - xy[1] + c)
+        elif xy[0] == 3:
+            result += (dg[1] + xy[1])
+        elif xy[0] == 4:
+            result += (r - dg[1] + xy[1])
+
+    elif dg[0] == 2:
+        if xy[0] == 1:
+            result += min(dg[1] + xy[1] + c, r * 2 - dg[1] - xy[1] + c)
+        elif xy[0] == 3:
+            result += (dg[1] + c - xy[1])
+        elif xy[0] == 4:
+            result += (r - dg[1] + c - xy[1])
+
+    elif dg[0] == 3:
+        if xy[0] == 1:
+            result += (dg[1] + xy[1])
+        elif xy[0] == 2:
+            result += (c - dg[1] + xy[1])
+        elif xy[0] == 4:
+            result += min(dg[1] + xy[1] + r, c * 2 - dg[1] - xy[1] + r)
+
+    else:
+        if xy[0] == 1:
+            result += (dg[1] + r - xy[1])
+        elif xy[0] == 2:
+            result += (c - dg[1] + r - xy[1])
+        elif xy[0] == 3:
+            result += min(dg[1] + xy[1] + r, c * 2 - dg[1] - xy[1] + r)
+
+print(result)
+'''
 
