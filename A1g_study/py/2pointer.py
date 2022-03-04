@@ -1,4 +1,5 @@
 # 1806
+'''
 n, s = map(int, input().split())
 data = list(map(int, input().split()))
 
@@ -18,5 +19,5 @@ for start in range(n):
 if min_len == n + 1:
     min_len = 0
 print(min_len)
-
+'''
 

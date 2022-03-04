@@ -24,3 +24,7 @@ for i in range(m, n+1):
     if array[i]:
         print(i)
 '''
+
+
+# 4110
+
