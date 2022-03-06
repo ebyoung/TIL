@@ -17,10 +17,10 @@ print(r_1, r_2, r_3, math.degrees(radian))
 
 
 # 당구각 예시
-ro4 = lambda x: round(x, 4)
+# ro4 = lambda x: round(x, 4)
 
 white_x = 234
-white_y = ro4(127 - math.sqrt(3) * 20)
+white_y = round((127 - math.sqrt(3) * 20), 4)
 target_x = 250
 target_y = 110
 
@@ -57,5 +57,5 @@ ang2 = math.acos(cos_ang2)
 ang1 = math.atan(x / y)
 
 #5. 실제 구하고자 하는 각도 θ는 ang1 + ang2
-angle = ro4(math.degrees(ang1 + ang2))
+angle = round(math.degrees(ang1 + ang2), 4)
 print(angle)
