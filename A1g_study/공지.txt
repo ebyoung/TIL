@@ -1,14 +1,11 @@
 오늘의 알고리즘 스터디💯
 
 오늘의 강의💻
-https://youtu.be/AjFlp951nz0
-자료구조: 우선순위 큐(Priority Queue)와 힙(Heap) 10분 핵심 요약
+https://youtu.be/Ppimbaxm8d8
+코딩 테스트를 위한 벨만 포드 알고리즘 7분 핵심 요약
 
-https://youtu.be/i5yHkP1jQmo
-코딩 테스트를 위한 트리(Tree) 자료구조 10분 핵심 요약
-
-https://youtu.be/fg2iGP4e2mc
-자료구조: 바이너리 인덱스 트리(Binary Indexed Tree, BIT, 펜윅 트리) 10분 정복
+https://youtu.be/O895NbxirM8
+최소 공통 조상(Lowest Common Ancestor, LCA) 알고리즘 10분 정복
 
 
 궁금한거 안되는거 질문
