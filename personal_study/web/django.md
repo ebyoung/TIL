@@ -1,6 +1,6 @@
 # Django
 
-## Web Framework
+## 1. Web Framework
 
 ### Web
 
@@ -70,3 +70,100 @@
 
 - 전체적인 구조는 요청이 들어왔을 때 urls.py에서 어떤 함수를 호출할 지 확인하고, views.py에서 적절함 함수를 호출
 - 이후 models.py에 정의된 데이터 구조에 따라 데이터를 읽거나 쓰고, 지정된 템플릿을 응답
+
+
+
+
+
+## 3. 진행 순서
+
+```bash
+# 환경 세팅
+$ python -m venv venv				# 가상환경 생성
+$ source venv/Scripts/activate		# 가상환경 활성화
+$ pip install django==3.2.12		# 버전 3.2.12로 설치
+$ pip install -r requirments		# 혹은 requirements 그대로 설치
+
+# 프로젝트 생성
+$ django-admin startproject pjt01 .	# 프로젝트 이름에 하이픈(-)과 사용중인 키워드 사용 불가, 마지막에 . 잊지않기
+$ python manage.py runserver		# 서버 실행
+$ python manage.py startapp app01	# 어플리케이션 생성, 일반적으로는 어플리케이션 이름으로 복수형 사용 권장
+```
+
+
+
+## 4. 프로젝트 구조
+
+- `BASE_DIR/`
+
+> `	pjt01/`
+>
+> > `__init__.py`: 파이썬이 이 디렉토리를 하나의 파이썬 패키지로 다루도록 지시
+> >
+> > `asgi.py`: Asynchronous Server Gateway Interface, 애플리케이션이 비동기식 웹 서버와 연결 및 소통하는 것을 도움
+> >
+> > `settings.py`: 모든 설정을 포함
+> >
+> > - 수정이 필요한 부분
+> >
+> >   ```python
+> >   INSTALLED_APPS = [
+> >       # 순서도 중요!
+> >   	# Local apps
+> >       'app01',				# 앱 생성시 등록
+> >   
+> >       # Third party
+> >       'django_extensions',	# 추가기능 사용 위해 등록
+> >       
+> >       # Django apps
+> >       'django.contrib.admin',
+> >       'django.contrib.auth',
+> >       'django.contrib.contenttypes',
+> >       'django.contrib.sessions',
+> >       'django.contrib.messages',
+> >       'django.contrib.staticfiles',
+> >   ]
+> >   
+> >   TEMPLATES = [
+> >       {
+> >           'BACKEND': 'django.template.backends.django.DjangoTemplates',
+> >           'DIRS': [BASE_DIR / 'templates',],	# base.html을 만들어 기본 템플릿으로 활용 시 경로 등록
+> >           'APP_DIRS': True,
+> >           'OPTIONS': {
+> >               'context_processors': [
+> >                   'django.template.context_processors.debug',
+> >                   'django.template.context_processors.request',
+> >                   'django.contrib.auth.context_processors.auth',
+> >                   'django.contrib.messages.context_processors.messages',
+> >               ],
+> >           },
+> >       },
+> >   ]
+> >   
+> >   LANGUAGE_CODE = 'ko-kr'		# 언어 설정
+> >   
+> >   TIME_ZONE = 'Asia/Seoul'	# 시각 설정
+> >   ```
+> >
+> > `urls.py`: 사이트의 url과 적절한 views의 연결을 지정
+> >
+> > - 기본 구조
+> >
+> >   ```python
+> >   from django.contrib import admin
+> >   from django.urls import path, include
+> >   
+> >   urlpatterns = [
+> >       path('admin/', admin.site.urls),		# Django는 기본적으로 admin 페이지 지원
+> >       path('app01/', include('app01.urls')),	# 프로젝트의 urls.py의 역할은 특정 앱으로 요청이 들어오면 해당 앱으로 연결하는 것
+> >   ]
+> >   ```
+> >
+> > `wsgi.py`: Web Server Gateway Interface, 애플리케이션이 웹서버와 연결 및 소통하는 것을 도움
+> `manage.py`: Django 프로젝트와 다양한 방법으로 상호작용하는 커맨드라인 유틸리티
+>
+> - Django와 관련된 명령어를 실행할 때 호출
+>
+>   ```bash
+>   $ python manage.py <conmmad> [options]
+>   ```
