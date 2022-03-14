@@ -113,5 +113,67 @@ else:
 '''
 
 # 17142 연구소3
-''''''
+'''
+from itertools import combinations
+from copy import deepcopy
+from collections import deque
 
+def virus(lab, start, n_space):
+    if n_space == 0:
+        return n_space
+
+    Q = deque(start)
+    dxy = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    maxi = 0
+    while Q and n_space:
+        v = Q.popleft()
+        next_num = lab[v[0]][v[1]] + 1
+        for d in dxy:
+            ny = v[0] + d[0]
+            nx = v[1] + d[1]
+            if 0 <= ny < n and 0 <= nx < n:
+                if lab[ny][nx] == 0:
+                    n_space -= 1
+                    lab[ny][nx] = next_num
+                    maxi = max(maxi, next_num)
+                    Q.append((ny, nx))
+                elif lab[ny][nx] == 2:
+                    lab[ny][nx] = next_num
+                    maxi = max(maxi, next_num)
+                    Q.append((ny, nx))
+
+    if n_space:
+        return n**2
+    return maxi - 3
+
+
+n, m = map(int, input().split())
+laboratory = []
+
+for _ in range(n):
+    laboratory.append(list(map(int, input().split())))
+
+pos_of_viruses = []
+num_spaces = 0
+
+for i in range(n):
+    for j in range(n):
+        if laboratory[i][j] == 0:
+            num_spaces += 1
+        elif laboratory[i][j] == 2:
+            pos_of_viruses.append((i, j))
+
+cases = list(combinations(pos_of_viruses, m))
+result = n**2
+
+for case in cases:
+    lab_case = deepcopy(laboratory)
+    for pos in case:
+        lab_case[pos[0]][pos[1]] = 3
+    result = min(result, virus(lab_case, case, num_spaces))
+
+if result == n**2:
+    print(-1)
+else:
+    print(result)
+'''

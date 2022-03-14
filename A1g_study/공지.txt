@@ -1,15 +1,25 @@
 오늘의 알고리즘 스터디💯
 
 오늘의 문제🤔
-https://www.acmicpc.net/problem/14502
+https://www.acmicpc.net/problem/17141
 
 궁금한거 안되는거 질문
 아무나 대답
 
 --------------------------------
 Problem Queue
-https://www.acmicpc.net/problem/17141
 https://www.acmicpc.net/problem/17142
+https://www.acmicpc.net/problem/16637
+https://www.acmicpc.net/problem/17070
+https://www.acmicpc.net/problem/17069
+https://www.acmicpc.net/problem/17135
+https://www.acmicpc.net/problem/17136
+https://www.acmicpc.net/problem/17281
+https://www.acmicpc.net/problem/17471
+https://www.acmicpc.net/problem/17472
+--------------------------------
+Solved
+https://www.acmicpc.net/problem/14502
 --------------------------------
 
 오늘의 알고리즘 스터디💯
