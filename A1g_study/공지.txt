@@ -1,25 +1,32 @@
 오늘의 알고리즘 스터디💯
 
 오늘의 문제🤔
-https://www.acmicpc.net/problem/17142
+카카오 코드 페스티벌 2018 예선
+https://www.acmicpc.net/category/detail/1897
+A 상금 헌터
+https://www.acmicpc.net/problem/15953
+
 
 궁금한거 안되는거 질문
 아무나 대답
 
 --------------------------------
 Problem Queue
-https://www.acmicpc.net/problem/16637
-https://www.acmicpc.net/problem/17070
-https://www.acmicpc.net/problem/17069
-https://www.acmicpc.net/problem/17135
-https://www.acmicpc.net/problem/17136
-https://www.acmicpc.net/problem/17281
-https://www.acmicpc.net/problem/17471
-https://www.acmicpc.net/problem/17472
+B 인형들
+https://www.acmicpc.net/problem/15954
+C 숏코딩
+https://www.acmicpc.net/problem/15956
+D 부스터
+https://www.acmicpc.net/problem/15955
+E 음악 추천
+https://www.acmicpc.net/problem/15957
+F 프로도의 100일 준비
+https://www.acmicpc.net/problem/15958
 --------------------------------
 Solved
 https://www.acmicpc.net/problem/14502
 https://www.acmicpc.net/problem/17141
+https://www.acmicpc.net/problem/17142
 --------------------------------
 
 오늘의 알고리즘 스터디💯
