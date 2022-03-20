@@ -26,8 +26,9 @@ for _ in range(T):
     a, b = map(int, input().split())
     print(money(a, b))
 '''
+
 # B
-''''''
+'''
 import math
 import sys
 N, K = map(int, sys.stdin.readline().split())
@@ -50,3 +51,6 @@ for i in range(N-K+1):
 
 result = math.sqrt(min(vars))
 print(result)
+'''
+# C
+
