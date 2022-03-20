@@ -114,6 +114,9 @@
 - 일부 프로그래밍 구조(조건, 반복문 등)를 사용할 수 있지만, python 코드로 실행되는 것이 아님
   1. 변수: `views.py`에서 정의한 변수를 `render()`에 딕셔너리 형태로 넘겨 템플릿 파일에서 사용하는 것
      - `{{ 변수명 }}` 의 형태로 딕셔너리의 키를 변수명으로 사용해 해당하는 값을 사용
+     - 변수명은 영,숫자와 밑줄(_)의 조합으로 구성될 수 있으나 밑줄로는 시작 할 수 없음
+     - 변수명에 공백이나 구두점 문자를 사용할 수 없음
+     - `dot(.)`를 사용하여 변수 속성에 접근
   2. 필터
      - `{{ 변수명|필터:인자 }}`의 형태로 표시할 변수를 수정
      - chained가 가능하며 일부 필터는 인자를 받을 수 있음
@@ -130,11 +133,182 @@
 - 코드의 재사용성을 위한 템플릿 상속이 가능
 - 사이트의 모든 공통 요소를 포함하고, 하위 템플릿이 재정의(override) 할 수 있는 불록을 정의하는 기본 스켈레톤 템플릿 활용
 - 최상단에 `{% extends 'base.html' %}`의 형태로 작성해 자식 템플릿이 부모 템플릿을 확장한다는 것을 알림
+  - 두개 이상 사용 불가
+  - 반드시 템플릿의 첫번째 탬플릿 태그여야 함
+
 - `{% block content %}` `{% endblock content %}`의 형태로 하위 템플릿에서 override를 통해 채울 수 있는 블록 공간을 정의
   - `endblock`의 `content`는 생략 가능
   - 부모와 자식 템플릿간에 블록 이름(`content`부분)이 동일해야함
 - `settings.py`의 TEMPLATES 리스트안에 있는 딕셔너리에서 'DIRS' 부분에 부모 템플릿의 경로를 추가해줘야 함
 - 템플릿 내 다른 템플릿을 포함 하는 `{% include '다른템플릿.html' %}`은 단순히 해당 템플릿을 로드해 현재 페이지로 렌더링 하는 것
+
+
+
+
+
+## Static files
+
+**Static files**
+
+- 정적 파일 
+- 응답할 때 별도의 처리 없이 파일 내용을 그대로 보여주면 되는 파일 
+- 사용자의 요청에 따라 내용이 바뀌는 것이 아니라 요청한 것을 그대로 보여주는 파일 
+- 예를 들어, 웹 사이트는 일반적으로 이미지, 자바 스크립트 또는 CSS와 같은 미리 준비된 추가 파일(움직이지 않는)을 제공해야 함 
+- Django에서는 이러한 파일들을 “static file”이라 함
+
+> https://docs.djangoproject.com/en/3.1/howto/static-files/#managing-static-files-e-g-images-javascript-css
+
+<br>
+
+### Static files 구성
+
+1. django.contrib.staticfiles 앱이 `INSTALLED_APPS`에 있는지 확인
+2. setting.py에 `STATIC_URL` 정의
+3. 템플릿에서 static 템플릿 태그를 사용하여 static file이 있는 상대경로를 빌드
+4. 앱에 static file 저장하기 (`my_app/static/my_app/sample.jpg`)
+
+<br>
+
+**Django template tag**
+
+- load
+  - 사용자 정의 템플릿 태그 세트를 로드
+  - 로드하는 라이브러리, 패키지에 등록된 모든 태그와 필터를 로드
+- static
+  - STATIC_ROOT에 저장된 정적 파일에 연결
+
+<br>
+
+- 이미지 파일 위치 - `articles/static/articles/images/`
+- static file 기본 경로
+  - `app_name/static/`
+
+<br>
+
+### The staticfiles app
+
+> https://docs.djangoproject.com/en/3.1/ref/contrib/staticfiles/#module-django.contrib.staticfiles
+
+**`STATICFILES_DIRS`**
+
+```python
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+```
+
+- app/static/ 디렉토리 경로를 사용하는 것(기본 경로) 외에 추가적인 정적 파일 경로 목록을 정의하는 리스트
+- 추가 파일 디렉토리에 대한 전체 경로를 포함하는 문자열 목록으로 작성되어야 함
+
+<br>
+
+**`STATIC_URL`**
+
+```python
+STATIC_URL = '/static/'
+```
+
+- STATIC_ROOT에 있는 정적 파일을 참조 할 때 사용할 URL 
+- 개발 단계에서는 실제 정적 파일들이 저장되어 있는 app/static/ 경로 (기본 경로) 및STATICFILES_DIRS에 정의된 추가 경로들을 탐색함 
+- 실제 파일이나 디렉토리가 아니며, URL로만 존재 비어 있지 않은 값으로 설정 한다면 반드시 slash(/)로 끝나야 함
+
+<br>
+
+**`STATIC_ROOT`**
+
+- collectstatic이 배포를 위해 정적 파일을 수집하는 디렉토리의 절대 경로 
+- django 프로젝트에서 사용하는 모든 정적 파일을 한 곳에 모아 넣는 경로 
+- 개발 과정에서 setting.py의 DEBUG 값이 True로 설정되어 있으면 해당 값은 작용되지 않음 
+- 직접 작성하지 않으면 django 프로젝트에서는 setting.py에 작성되어 있지 않음 
+- 실 서비스 환경(배포 환경)에서 django의 모든 정적 파일을 다른 웹 서버가 직접 제공하기 위함
+
+> [참고] **collectstatic**
+>
+> - 프로젝트 배포 시 흩어져있는 정적 파일들을 모아 특정 디렉토리로 옮기는 작업
+>
+> ```python
+> # settings.py 예시
+> 
+> STATIC_ROOT = BASE_DIR / 'staticfiles'
+> ```
+>
+> ```bash
+> $ python manage.py collectstatic
+> ```
+
+<b
+
+<br>
+
+#### static file 사용하기
+
+1. 기본경로
+
+   - `article/static/articles/` 경로에 이미지 파일 위치
+
+     ```django
+     <!-- articles/index.html -->
+     
+     {% extends 'base.html' %}
+     {% load static %}
+     
+     {% block content %}
+       <img src="{% static 'articles/sample.png' %}" alt="sample">
+       ...
+     {% endblock %}
+     ```
+
+     - 이미지 파일 위치 - `articles/static/articles/`
+
+    - static file 기본 경로
+
+      - `app_name/static/`
+
+2. 추가 경로
+
+   - `static/` 경로에 CSS 파일 위치
+
+```django
+<!-- base.html -->
+
+<head>
+  {% block css %}{% endblock %}
+</head>
+```
+
+```python
+## settings.py
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+```
+
+```django
+<!-- articles/index.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+{% endblock %}
+```
+
+```css
+/* static/style.css */
+
+h1 {
+    color: crimson;
+}
+```
+
+
+<br>
+
+**STATIC_URL 확인해보기**
+
+**![Snipaste_2022-03-04_16-17-39](django.assets/Snipaste_2022-03-04_16-17-39-16477803825241.png)**
 
 
 
@@ -179,7 +353,7 @@ $ python showmigrations				# 프로젝트 전체의 마이그레이션 파일들
 > >   INSTALLED_APPS = [
 > >       # 순서도 중요!
 > >   	# Local apps
-> >       'app01',				# 앱 생성시 등록
+> >       'app01',				# 앱 생성시 등록(반드시 생성 후 등록)
 > >     
 > >       # Third party
 > >       'django_extensions',	# 추가기능 사용 위해 등록
@@ -209,9 +383,15 @@ $ python showmigrations				# 프로젝트 전체의 마이그레이션 파일들
 > >       },
 > >   ]
 > >     
-> >   LANGUAGE_CODE = 'ko-kr'		# 언어 설정
+> >   LANGUAGE_CODE = 'ko-kr'		# 언어 설정, USE_I18N 활성화 필요
 > >     
-> >   TIME_ZONE = 'Asia/Seoul'	# 시각 설정
+> >   TIME_ZONE = 'Asia/Seoul'	# 시각 설정, USE_TZ = True 필요
+> >     
+> >   USE_I18N = True				# 번역 시스템 활성화 여부
+> >     
+> >   USE_L10N = True				# 데이터의 지역화 된 형식을 기본적으로 활성화할지 여부
+> >     
+> >   USE_TZ = True				# datetimes가 기본적으로 시간대를 인식하는지 여부
 > >   ```
 > >
 > > `urls.py`: 사이트의 url과 적절한 views의 연결을 지정
@@ -273,9 +453,9 @@ $ python showmigrations				# 프로젝트 전체의 마이그레이션 파일들
 > >   ```python
 > >   from django.urls import path
 > >   from . import views
-> >   
+> >     
 > >   app_name = 'articles'										# 앱 이름 지정 필요
-> >   
+> >     
 > >   urlpatterns = [
 > >       # index: articles/
 > >       path('', views.index, name='index'),					# 기본 페이지는 빈 문자열을 이용
@@ -287,5 +467,35 @@ $ python showmigrations				# 프로젝트 전체의 마이그레이션 파일들
 > > `views.py`: view 함수들 정의
 > >
 > > - HTTP 요청을 수신하고 HTTP 응답을 반환하는 함수 작성
+> >
 > > - Model을 통해 요청에 맞는 필요 데이터에 접근
+> >
 > > - Template에게 HTTP 응답 서식을 맡김
+> >
+> > - 구조
+> >
+> >   ```python
+> >   from django.shortcuts import redirect, render
+> >   from .models import Article
+> >   
+> >   
+> >   def index(request):
+> >   	# 필요한 연산
+> >       # html로 넘겨줄 데이터는 딕셔너리 형태로
+> >      	context = {
+> >           'key': value,
+> >       }
+> >       return render(request, 'articles/index.html', context)
+> >   
+> >   def create(request):
+> >       # 필요한 연산
+> >   	return redirect('articles:index')
+> >   ```
+> >
+> >   
+
+**[참고]** `runserver` **Automatic reloading**
+
+- 개발 서버는 요청이 들어올 때마다(코드가 저장될 때 마다) 자동으로 Python 코드를 다시 불러온다. 
+- 코드의 변경사항을 반영하기 위해서 굳이 서버를 재가동 하지 않아도 된다. 
+- 그러나, 파일을 추가하는 등의 몇몇의 동작(커스텀 필터, 새로운 모듈 추가 등)은 개발 서버가 자동으로 인식하지 못하기 때문에, 이런 상황에서는 서버를 재가동 해야 적용되는 경우도 있다.
