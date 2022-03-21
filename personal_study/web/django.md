@@ -354,10 +354,10 @@ $ python showmigrations				# 프로젝트 전체의 마이그레이션 파일들
 > >       # 순서도 중요!
 > >   	# Local apps
 > >       'app01',				# 앱 생성시 등록(반드시 생성 후 등록)
-> >     
+> >       
 > >       # Third party
 > >       'django_extensions',	# 추가기능 사용 위해 등록
-> >     
+> >       
 > >       # Django apps
 > >       'django.contrib.admin',
 > >       'django.contrib.auth',
@@ -366,7 +366,7 @@ $ python showmigrations				# 프로젝트 전체의 마이그레이션 파일들
 > >       'django.contrib.messages',
 > >       'django.contrib.staticfiles',
 > >   ]
-> >     
+> >       
 > >   TEMPLATES = [
 > >       {
 > >           'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -382,15 +382,15 @@ $ python showmigrations				# 프로젝트 전체의 마이그레이션 파일들
 > >           },
 > >       },
 > >   ]
-> >     
+> >       
 > >   LANGUAGE_CODE = 'ko-kr'		# 언어 설정, USE_I18N 활성화 필요
-> >     
+> >       
 > >   TIME_ZONE = 'Asia/Seoul'	# 시각 설정, USE_TZ = True 필요
-> >     
+> >       
 > >   USE_I18N = True				# 번역 시스템 활성화 여부
-> >     
+> >       
 > >   USE_L10N = True				# 데이터의 지역화 된 형식을 기본적으로 활성화할지 여부
-> >     
+> >       
 > >   USE_TZ = True				# datetimes가 기본적으로 시간대를 인식하는지 여부
 > >   ```
 > >
@@ -401,7 +401,7 @@ $ python showmigrations				# 프로젝트 전체의 마이그레이션 파일들
 > >   ```python
 > >   from django.contrib import admin
 > >   from django.urls import path, include
-> >     
+> >       
 > >   urlpatterns = [
 > >       path('admin/', admin.site.urls),		# Django는 기본적으로 admin 페이지 지원
 > >       path('app01/', include('app01.urls')),	# 프로젝트의 urls.py의 역할은 특정 앱으로 요청이 들어오면 해당 앱으로 연결하는 것
@@ -453,9 +453,9 @@ $ python showmigrations				# 프로젝트 전체의 마이그레이션 파일들
 > >   ```python
 > >   from django.urls import path
 > >   from . import views
-> >     
+> >   
 > >   app_name = 'articles'										# 앱 이름 지정 필요
-> >     
+> >   
 > >   urlpatterns = [
 > >       # index: articles/
 > >       path('', views.index, name='index'),					# 기본 페이지는 빈 문자열을 이용
@@ -478,21 +478,22 @@ $ python showmigrations				# 프로젝트 전체의 마이그레이션 파일들
 > >   from django.shortcuts import redirect, render
 > >   from .models import Article
 > >   
+> >    def index(request):
+> >     	# 필요한 연산
 > >   
-> >   def index(request):
+> >   
+> >   	# html로 넘겨줄 데이터는 딕셔너리 형태로
+> >   	context = {
+> >             'key': value,
+> >         }
+> >         return render(request, 'articles/index.html', context)
+> >   
+> >       def create(request):
+> >   
+> >   
 > >   	# 필요한 연산
-> >       # html로 넘겨줄 데이터는 딕셔너리 형태로
-> >      	context = {
-> >           'key': value,
-> >       }
-> >       return render(request, 'articles/index.html', context)
-> >   
-> >   def create(request):
-> >       # 필요한 연산
 > >   	return redirect('articles:index')
-> >   ```
 > >
-> >   
 
 **[참고]** `runserver` **Automatic reloading**
 
