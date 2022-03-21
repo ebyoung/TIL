@@ -67,3 +67,38 @@
 # n = int(input())
 # print((2**n)-1) # 수학적으로 계산 가능, 굳이 따로 만들필요 없음
 # hanoi(n, 1, 3)
+
+
+# 5568
+# 1.
+# from itertools import permutations
+#
+# n = int(input())
+# k = int(input())
+# data = [input() for _ in range(n)]
+# count = 0
+# nums = list(permutations(data, k))
+# num_set = set()
+# for num in nums:
+#     num_set.add(int(''.join(num)))
+# print(len(num_set))
+
+# 2.
+# def make_nums(cards, data):
+#     global num_set
+#     if len(cards) == k:
+#         num_set.add(int(''.join(cards)))
+#     else:
+#         for i in range(len(data)):
+#             num = data.pop(i)
+#             make_nums(cards + [num], data)
+#             data.insert(i, num)
+#
+#
+# n = int(input())
+# k = int(input())
+# data = [input() for _ in range(n)]
+# count = 0
+# num_set = set()
+# make_nums([], data)
+# print(len(num_set))

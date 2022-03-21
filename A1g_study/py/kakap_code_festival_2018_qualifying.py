@@ -52,5 +52,13 @@ for i in range(N-K+1):
 result = math.sqrt(min(vars))
 print(result)
 '''
-# C
 
+# C
+'''
+data = list(input().split('&&'))
+graph = {}
+for x in data:
+    x1, x2 = x.split('==')
+'''
+
+# D
