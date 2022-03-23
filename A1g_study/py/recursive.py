@@ -102,3 +102,47 @@
 # num_set = set()
 # make_nums([], data)
 # print(len(num_set))
+
+# 12919
+# s = input()
+# t = input()
+# n = len(s)
+# answer = 0
+# def ab2(string):
+#     global answer
+#     if len(string) == n:
+#         if string == s:
+#             answer = 1
+#     else:
+#         if string[-1] == 'A':
+#             ab2(string[:-1])
+#         if string[0] == 'B':
+#             ab2(string[1:][::-1])
+#
+# ab2(t)
+# print(answer)
+
+# 15270
+def friends(data, visited, count):
+    global max_len
+    if count > max_len:
+        max_len = count
+    new_data = [x for x in data]
+    while new_data:
+        da = new_data.pop(0)
+        if not visited[da[0]] and not visited[da[1]]:
+            visited[da[0]] = visited[da[1]] = 1
+            friends(new_data, visited, count + 2)
+            visited[da[0]] = visited[da[1]] = 0
+
+
+n, m = map(int, input().split())
+data = [list(map(int, input().split())) for _ in range(m)]
+
+visited = [0] * (n+1)
+max_len = 0
+friends(data, visited, 0)
+if max_len < n:
+    max_len += 1
+
+print(max_len)

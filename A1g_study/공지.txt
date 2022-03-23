@@ -1,8 +1,7 @@
 오늘의 알고리즘 스터디💯
 
 오늘의 문제🤔
-https://www.acmicpc.net/problem/5568
-
+https://www.acmicpc.net/problem/12919
 
 
 궁금한거 안되는거 질문
@@ -10,11 +9,12 @@ https://www.acmicpc.net/problem/5568
 
 --------------------------------
 Problem Queue
-https://www.acmicpc.net/problem/12904
-https://www.acmicpc.net/problem/12919
-
+https://www.acmicpc.net/problem/15270
 --------------------------------
 Solved
+https://www.acmicpc.net/problem/12904
+https://www.acmicpc.net/problem/5568
+
 B 인형들
 https://www.acmicpc.net/problem/15954
 A 상금 헌터

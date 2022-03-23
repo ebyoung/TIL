@@ -33,3 +33,17 @@
 #     result.append(s.find(char))
 
 # print(*result)
+
+
+# 12904
+# s = input()
+# t = input()
+#
+# while len(t) > len(s):
+#     if t[-1] == 'A':
+#         t = t[:-1]
+#     elif t[-1] == 'B':
+#         t = t[:-1]
+#         t = t[::-1]
+#
+# print(int(bool(t == s)))
