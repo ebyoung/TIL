@@ -31,3 +31,36 @@ while Q:
         print(v, end=" ")
 '''
 
+# 2178
+''''''
+from collections import  deque
+def bfs(start):
+    queue = deque(start)
+    while queue:
+        v = queue.popleft()
+        for d in dxy:
+            ny = v[0] + d[0]
+            nx = v[1] + d[1]
+            if 0 <= ny < N and 0 <= nx < M and not array[ny][nx]:
+                array[ny][nx] = array[v[0]][v[1]] + 1
+                queue.append((ny, nx))
+
+    result = 0
+    for i in range(N):
+        for j in range(M):
+            if array[i][j]:
+                result = max(result, array[i][j])
+            else:
+                return -1
+    return result-1
+
+
+M, N = map(int, input().split())
+array = [list(map(int, input().split())) for _ in range(N)]
+dxy = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+start = []
+for i in range(N):
+    for j in range(M):
+        if array[i][j] == 1:
+            start.append((i, j))
+print(bfs(start))

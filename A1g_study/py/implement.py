@@ -7,6 +7,7 @@
 
 
 # 17471
+'''
 def check_dfs(sub_set):
     global result
     visited = [0] * (N+1)
@@ -64,3 +65,7 @@ for i in range(1 << N):
     check_dfs(sub_set)
 
 print(result)
+'''
+
+# 17779
+
