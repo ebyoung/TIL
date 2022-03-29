@@ -1,5 +1,5 @@
 # 수업시간 예제
-n = int(input())
+# n = int(input())
 
 # 처음 입력 받기 외우기
 # nums = list(map(int, input().split()))

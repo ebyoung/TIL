@@ -31,9 +31,9 @@ while Q:
         print(v, end=" ")
 '''
 
-# 2178
-''''''
-from collections import  deque
+# 7576
+'''
+from collections import deque
 def bfs(start):
     queue = deque(start)
     while queue:
@@ -64,3 +64,28 @@ for i in range(N):
         if array[i][j] == 1:
             start.append((i, j))
 print(bfs(start))
+'''
+
+# 2178
+'''
+from collections import deque
+
+
+N, M = map(int, input().split())
+array = [list(map(int, input())) for _ in range(N)]
+dxy = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+queue = deque([(0, 0)])
+
+while queue:
+    v = queue.popleft()
+    if v[0] == N-1 and v[1] == M-1:
+        answer = array[v[0]][v[1]]
+    for d in dxy:
+        ny = v[0] + d[0]
+        nx = v[1] + d[1]
+        if 0 <= ny < N and 0 <= nx < M and array[ny][nx] == 1:
+            queue.append((ny, nx))
+            array[ny][nx] = array[v[0]][v[1]] + 1
+
+print(answer)
+'''
