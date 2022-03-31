@@ -89,3 +89,36 @@ while queue:
 
 print(answer)
 '''
+# 22016
+''''''
+from collections import deque
+
+
+def bfs(s):
+    visited = [[[0, 0] for _ in range(M)] for _ in range(N)]
+    queue = deque([s])
+    visited[s[0]][s[1]][0] = 1
+    visited[s[0]][s[1]][1] = 1
+    while queue:
+        v = queue.popleft()
+        k = visited[v[0]][v[1]][v[2]]
+        if v[0] == N-1 and v[1] == M-1:
+            return k
+        for d in dxy:
+            ny = v[0] + d[0]
+            nx = v[1] + d[1]
+            if 0 <= ny < N and 0 <= nx < M and not visited[ny][nx][v[2]]:
+                if not array[ny][nx]:
+                    visited[ny][nx][v[2]] = k + 1
+                    queue.append((ny, nx, v[2]))
+                elif array[ny][nx] and not v[2]:
+                    visited[ny][nx][1] = k + 1
+                    queue.append((ny, nx, 1))
+    return -1
+
+
+N, M = map(int, input().split())
+array = [list(map(int, input())) for _ in range(N)]
+dxy = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+answer = bfs((0, 0, 0))
+print(answer)
