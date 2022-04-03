@@ -178,3 +178,26 @@ for i in range(1, N):
             data[i][j] += max(data[i-1][j-1], data[i-1][j])
 print(max(data[-1]))
 '''
+
+# 2579
+'''
+def stairs(step):
+    if not dp[step]:
+        if step == 1:
+            dp[step] = data[step]
+        elif step == 2:
+            dp[step] = stairs(step-1) + data[step]
+        elif step == 3:
+            dp[step] = max(stairs(step-2) + data[step], data[step-1] + data[step])
+        else:
+            result = max(data[step-1] + stairs(step-3), stairs(step-2))
+            dp[step] = result + data[step]
+
+    return dp[step]
+
+
+n = int(input())
+data = [0] + [int(input()) for _ in range(n)]
+dp = [0] * (n + 1)
+print(stairs(n))
+'''
