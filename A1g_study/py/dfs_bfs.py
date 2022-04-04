@@ -90,7 +90,7 @@ while queue:
 print(answer)
 '''
 # 22016
-''''''
+'''
 from collections import deque
 
 
@@ -122,3 +122,5 @@ array = [list(map(int, input())) for _ in range(N)]
 dxy = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 answer = bfs((0, 0, 0))
 print(answer)
+'''
+
