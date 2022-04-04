@@ -1,4 +1,4 @@
-# Database
+# SQL
 
 [toc]
 
@@ -26,8 +26,8 @@
   - ROLLBACK
 
 
-
-## 2. Database 생성
+## 2. sqlite
+### 1. Database 생성
 
 > 해당하는 데이터베이스 파일이 있으면 해당DB를 콘솔로 연다. 
 >
@@ -59,7 +59,7 @@ sqlite> .import users.csv users_user -- users.csv 파일을 users_user 테이블
 
 
 
-## 3. 테이블 생성 및 삭제 
+### 2. 테이블 생성 및 삭제 
 
 > 데이터 타입의 종류는 INTEGER, TEXT, REAL, NUMERIC, BLOB 등이 존재한다.
 >
@@ -112,7 +112,7 @@ sqlite> .tables -- 테이블 제거 확인
 
 
 
-## 4. 데이터 추가, 읽기, 수정 및 삭제
+### 3. 데이터 추가, 읽기, 수정 및 삭제
 
 **추가 (INSERT)**
 
@@ -213,7 +213,7 @@ WHERE age >= 30 and last_name='김';
 
 
 
-## 5. 심화 SQL문
+### 4. 심화 SQL문
 
 > SELECT를 통해 데이터를 조회(Read)하는 다양한 방법
 >
@@ -229,7 +229,7 @@ WHERE age >= 30 and last_name='김';
 
 
 
-### Expressions
+#### Expressions
 
 - COUNT (레코드 값들의 개수 반환)
 
@@ -251,7 +251,7 @@ WHERE age >= 30 and last_name='김';
 
 
 
-### LIKE
+#### LIKE
 
 > LIKE는 두 가지 와일드 카드(언더스코어 그리고 퍼센트 기호)와 함께 동작한다.
 
@@ -342,3 +342,209 @@ GROUP BY last_name;
   ```
 
   
+
+## 3. MySQL
+
+### 1. SELECT
+
+1. 모든 내용 보기
+
+   - 테이블의 모든 컬럼: `*`(asterisk)
+
+   ```mysql
+   SELECT * FROM Customers;
+   -- 이와 같이 주석을 달 수 있습니다.
+   ```
+
+2. 원하는 컬럼만 골라서 보기
+
+   - `SELECT <컬럼명> FROM <테이블명>`
+
+   - 테이블의 컬럼이 아닌 값 선택
+
+   ```mysql
+   SELECT
+     CustomerName, 1, 'Hello', NULL
+   FROM Customers;
+   ```
+
+3. 원하는 조건의 행만 걸러서 보기
+
+   - `WHERE <조건>`
+
+4. 원하는 순서로 데이터 가져오기
+
+   - `ORDER BY <기준컬럼> <방향>`
+     - `ASC`: 오름차순, 기본값
+     - `DESC`: 내림차순
+
+   ```mysql
+   SELECT * FROM OrderDetails
+   ORDER BY ProductID ASC, Quantity DESC;
+   ```
+
+5. 원하는 만큼만 데이터 가져오기
+
+   - `LIMIT <가져올 갯수>`
+   - `LIMIT <건너뛸 갯수> <가져올 갯수>`
+
+6. 원하는 별명(alias)으로 데이터 가져오기
+
+   - `<컬럼명> AS <별명>`
+
+
+
+### 2. 연산자
+
+[공식문서](https://dev.mysql.com/doc/refman/8.0/en/non-typed-operators.html)
+
+1. 사칙연산
+
+   - `+`, `-`, `*`, `/`: 사칙 연산
+   - `%`, `MOD`: 나머지
+
+   ```mysql
+   SELECT 5 - 2.5 AS DIFFERENCE;
+   SELECT 'ABC' + 3;
+   -- 문자열에 사칙연산을 가하면 0으로 인식
+   SELECT '1' + '002' * 3;
+   -- 숫자로 구성된 문자열은 숫자로 자동인식
+   SELECT
+     ProductName,
+     Price / 2 AS HalfPrice
+   FROM Products;
+   ```
+
+2. 참/거짓 연산자
+
+   - TRUE는 1, FALSE는 0
+   - `WHERE`문에서 조건을 지정할 때 사용
+   - `IS`: 양쪽이 모두 TRUE 또는 FALSE
+   - `IS NOT`: 한쪽은 TRUE, 한쪽의 FALSE
+   - `&&`, `AND`: 양쪽이 모두 TRUE일 때만 TRUE
+   - `||`, `OR`: 한쪽이 TRUE면 TRUE
+   - `=`, `!=`, `<>`(양쪽 값이 다름, `!=`와 동일), `>`, `<`, `>=`, `<=`
+     - 문자열도 비교 가능, 대소문자 구분 안함
+   - 테이블의 컬럼이 아닌 값으로 선택
+
+   ```mysql
+   SELECT
+     ProductName, Price,
+     Price > 20 AS EXPENSIVE 
+   FROM Products;
+   
+   SELECT
+     ProductName, Price,
+     NOT Price > 20 AS CHEAP 
+   FROM Products;
+   ```
+
+   - `BETWEEN <최소> AND <최대>`, `NOT BETWEEN <최소> AND <최대>`
+   - `IN (값1, 2, 3)`, `NOT IN (값1, 2, 3)`
+
+   ```mysql
+   SELECT * FROM Customers
+   WHERE City IN ('Torino', 'Paris', 'Portland', 'Madrid') 
+   ```
+
+   - `LIKE `
+     - `%`: 0또는 N개의 문자를 가진 패턴
+     - `_`: 1개의 문자를 가진 패턴
+
+
+
+### 3. 숫자와 문자열 함수
+
+[숫자 관련 함수 공식 문서](https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html)
+
+1. 숫자 관련 함수
+
+   - `ROUND`: 반올림
+   - `CEIL`: 올림
+   - `FLOOR`: 내림
+   - `ABS`: 절대값
+   - `GREATEST(값1, 2, 3)`: 값들 중 가장 큰 값
+
+   ```mysql
+   SELECT 
+     GREATEST(1, 2, 3),
+     LEAST(1, 2, 3, 4, 5);
+   ```
+
+   - `LEAST(값1, 2 ,3)`: 가장 작은 값
+
+   ```mysql
+   SELECT
+     OrderDetailID, ProductID, Quantity,
+     GREATEST(OrderDetailID, ProductID, Quantity),
+     LEAST(OrderDetailID, ProductID, Quantity)
+   FROM OrderDetails;
+   ```
+
+   - `POW(A, B)`, `POWER(A, B)`: A를 B만큼 제곱
+   - `SQRT`: 제곱근
+   - `TRUNCATE(N, n)`: N의 소숫점 n자리까지
+     - 반올림이 아니라 그냥 해당 자리까지 표시
+     - n에 음수가 들어가면 1의 자리부터 0으로 표시
+
+2. 숫자 관련 집계 함수
+
+   - `MAX`: 최댓값
+   - `MIN`: 최솟값
+   - `COUNT`: NULL 제외한 갯수
+   - `SUM`: 총합
+   - `AVG`: 평균
+
+   ```mysql
+   SELECT
+     MAX(Quantity),
+     MIN(Quantity),
+     COUNT(Quantity),
+     SUM(Quantity),
+     AVG(Quantity)
+   FROM OrderDetails
+   WHERE OrderDetailID BETWEEN 20 AND 30;
+   ```
+
+3. 문자열 관련 함수
+
+   - `UCASE`, `UPPER`: 모두 대문자로
+   - `LCASE`, `LOWER`: 모두 소문자로
+   - `CONCAT(값1, 2, 3)`: 괄호 안의 내용 이어붙임
+
+   ```mysql
+   SELECT CONCAT('HELLO', ' ', 'THIS IS ', 2021);
+   SELECT CONCAT('O-ID: ', OrderID) FROM Orders;
+   ```
+
+   - `CONCAT_WS(S, 값1, 2, 3)`: 괄호 안의 내용 S를 기준으로 이어붙임
+
+   ```mysql
+   SELECT CONCAT_WS('-', 2021, 8, 15, 'AM');
+   SELECT
+     CONCAT_WS(' ', FirstName, LastName) AS FullName
+   FROM Employees;
+   ```
+
+   - `SUBSTR`, `SUBSTRING`: 주어진 값에 다라 문자열 자름
+
+   ```mysql
+   SELECT
+     SUBSTR('ABCDEFG', 3),		-- 처음부터 3개
+     SUBSTR('ABCDEFG', 3, 2),	-- 3번째 부터 2개
+     SUBSTR('ABCDEFG', -4),	-- 뒤에서부터 4개
+     SUBSTR('ABCDEFG', -4, 2);	-- 뒤에서 4번째 부터 2개
+   ```
+
+   - `LEFT(S, N)`: S의 왼쪽부터 N글자
+   - `RIGHT(S, N)`: S의 오른쪽부터 N글자
+   - `LENGTH`: 문자열의 바이트 길이
+   - `CHAR_LENTH`, `CHARACTER_LEGNTH`: 문자열의 문자 길이
+   - `TRIM`: 양쪽 공백 제거
+   - `LTRIM`: 왼쪽 공백 제거
+   - `RTRIM`: 오른쪽 공백 제거
+   - `LPAD(S, N, P)`: S가 N글자가 될 때까지 P를 왼쪽에 이어붙임
+   - `RPAD(S, N, P)`: S가 N글자가 될 때까지 P를 오른쪽에 이어붙임
+   - `REPLACE(S, A, B)`: S에서 A를 B로 변경
+   - `INSTR(S, s)`: S중 첫 번째 s의 위치를 반환, 없으면 0 반환
+   - `CAST(A, T)`: A를 T 자료형으로 변환
