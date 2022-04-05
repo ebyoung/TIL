@@ -1,3 +1,5 @@
+# 1717
+'''
 import sys
 sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
@@ -33,3 +35,34 @@ for i in range(m):
             print('NO')
     else:
         union_parent(parent, a, b)
+'''
+
+# 1976
+'''
+def find_set(x):
+    if p[x] != x:
+        p[x] = find_set(p[x])
+    return p[x]
+
+
+def union(x, y):
+    p[find_set(y)] = find_set(x)
+
+
+N = int(input())
+M = int(input())
+p = [x for x in range(N)]
+data = [list(map(int, input().split())) for _ in range(N)]
+for i in range(N):
+    for j in range(N):
+        if data[i][j]:
+            union(i, j)
+city = list(map(int, input().split()))
+plan = set()
+for x in city:
+    plan.add(find_set(x-1))
+if len(plan) == 1:
+    print('YES')
+else:
+    print('NO')
+'''

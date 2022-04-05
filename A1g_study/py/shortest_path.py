@@ -1,4 +1,5 @@
 # 1753
+'''
 import sys
 
 
@@ -35,3 +36,61 @@ for i in range(1, n+1):
         print('INF')
     else:
         print(distance[i])
+'''
+
+# 18352
+'''
+import heapq
+
+
+N = int(input())
+M = int(input())
+graph = [[1e9] * (N + 1) for _ in range(N+1)]
+dist = [1e9] * (N + 1)
+visited = [0] * (N + 1)
+for _ in range(M):
+    s, e, w = map(int, input().split())
+    graph[s][e] = min(graph[s][e], w)
+A, B = map(int, input().split())
+
+heap = []
+heapq.heappush(heap, (0, A))
+while heap:
+    w, v = heapq.heappop(heap)
+    if not visited[v]:
+        visited[v] = 1
+        dist[v] = w
+        for i in range(1, N+1):
+            if not visited[i]:
+                heapq.heappush(heap, (dist[v] + graph[v][i], i))
+print(dist[B])
+'''
+
+# 17472
+''''''
+from collections import deque
+
+
+def bfs(s, num):
+    dxy = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    queue = deque([s])
+    array[s[0]][s[1]] = num
+    while queue:
+        v = queue.popleft()
+        for d in dxy:
+            ny = v[0] + d[0]
+            nx = v[1] + d[1]
+            if 0 <= ny < N and 0 <= nx < M and array[ny][nx] == 1:
+                array[ny][nx] = num
+                queue.append((ny, nx))
+
+
+N, M = map(int, input().split())
+array = [list(map(int, input().split())) for _ in range(N)]
+num = 2
+for i in range(N):
+    for j in range(M):
+        if array[i][j] == 1:
+            bfs((i, j), num)
+            num += 1
+
