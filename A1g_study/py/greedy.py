@@ -97,3 +97,27 @@
 #         result += min_price * distances[i]
 
 # print(result)
+
+# 3661
+'''
+T = int(input())
+for _ in range(T):
+    c, n = map(int, input().split())
+    data = list(map(int, input().split()))
+    if c > sum(data):
+        print('IMPOSSIBLE')
+        continue
+    moneys = [[data[i], i] for i in range(n)]
+    moneys.sort(key=lambda x: x[0], reverse=True)
+    results = [0] * n
+    while c > 0:
+        for i in range(n):
+            if c > 0:
+                if moneys[i][0] > 0:
+                    moneys[i][0] -= 1
+                    results[moneys[i][1]] += 1
+                    c -= 1
+            else:
+                break
+    print(*results)
+'''
