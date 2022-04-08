@@ -201,3 +201,18 @@ data = [0] + [int(input()) for _ in range(n)]
 dp = [0] * (n + 1)
 print(stairs(n))
 '''
+
+# 1463
+'''
+dp = [0] * (10**6 + 1)
+x = int(input())
+for i in range(2, 10**6+1):
+    dp[i] = dp[i-1] + 1
+    if i % 2 == 0:
+        dp[i] = min(dp[i], dp[i//2] + 1)
+    if i % 3 == 0:
+        dp[i] = min(dp[i], dp[i//3] + 1)
+    if i == x:
+        break
+print(dp[x])
+'''
