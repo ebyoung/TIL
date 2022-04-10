@@ -548,3 +548,276 @@ GROUP BY last_name;
    - `REPLACE(S, A, B)`: S에서 A를 B로 변경
    - `INSTR(S, s)`: S중 첫 번째 s의 위치를 반환, 없으면 0 반환
    - `CAST(A, T)`: A를 T 자료형으로 변환
+
+
+
+### 4. 시간과 날짜 관련 함수들
+
+1. 시간 날짜 관련 함수
+
+   | 함수                           | 설명                                       |
+   | ------------------------------ | ------------------------------------------ |
+   | **CURRENT_DATE**, **CURDATE**  | 현재 날짜 반환                             |
+   | **CURRENT_TIME**, **CURTIME**  | 현재 시간 반환                             |
+   | **CURRENT_TIMESTAMP**, **NOW** | 현재 시간과 날짜 반환                      |
+   | **DATE**                       | 문자열에 따라 날짜 생성                    |
+   | **TIME**                       | 문자열에 따라 시간 생성                    |
+   | **YEAR**                       | 주어진 DATETIME값의 년도 반환              |
+   | **MONTHNAME**                  | 주어진 DATETIME값의 월(영문) 반환          |
+   | **MONTH**                      | 주어진 DATETIME값의 월 반환                |
+   | **WEEKDAY**                    | 주어진 DATETIME값의 요일값 반환(월요일: 0) |
+   | **DAYNAME**                    | 주어진 DATETIME값의 요일명 반환            |
+   | **DAYOFMONTH**, **DAY**        | 주어진 DATETIME값의 날짜(일) 반환          |
+   | **HOUR**                       | 주어진 DATETIME의 시 반환                  |
+   | **MINUTE**                     | 주어진 DATETIME의 분 반환                  |
+   | **SECOND**                     | 주어진 DATETIME의 초 반환                  |
+   | **ADDDATE**, **DATE_ADD**      | 시간/날짜 더하기                           |
+   | **SUBDATE**, **DATE_SUB**      | 시간/날짜 빼기                             |
+   | **ADDDATE**, **DATE_ADD**      | 시간/날짜 더하기                           |
+   | **SUBDATE**, **DATE_SUB**      | 시간/날짜 빼기                             |
+   | **LAST_DAY**                   | 해당 달의 마지막 날짜                      |
+   | **DATE_FORMAT**                | 시간/날짜를 지정한 형식으로 반환           |
+   | **STR _ TO _ DATE**(S, F)      | S를 F형식으로 해석하여 시간/날짜 생성      |
+
+2. 시간 날짜 출력 형식
+
+   | 형식           | 설명                      |
+   | -------------- | ------------------------- |
+   | **%Y**         | 년도 4자리                |
+   | **%y**         | 년도 2자리                |
+   | **%M**         | 월 영문                   |
+   | **%m**         | 월 숫자                   |
+   | **%D**         | 일 영문(1st, 2nd, 3rd...) |
+   | **%d**, **%e** | 일 숫자 (01 ~ 31)         |
+   | **%T**         | hh:mm:ss                  |
+   | **%r**         | hh:mm:ss AM/PM            |
+   | **%H**, **%k** | 시 (~23)                  |
+   | **%h**, **%l** | 시 (~12)                  |
+   | **%i**         | 분                        |
+   | **%S**, **%s** | 초                        |
+   | **%p**         | AM/PM                     |
+
+
+
+### 5. 조건문
+
+1. `IF(<조건>, T, F)`: 조건이 참이면 T, 거짓이면 F반환
+
+   ```mysql
+   SELECT IF (1 > 2, '1는 2보다 크다.', '1은 2보다 작다.');
+   ```
+
+2. `CASE`: 복잡한 조건문
+
+   - `WHEN <조건> THEN <결과>`: 조건이 참이면 결과 반환
+   - `ELSE <결과>`: 위에서 해당하는 조건이 없으면 결과 반환
+
+   ```mysql
+   SELECT
+     Price,
+     IF (Price > 30, 'Expensive', 'Cheap'),
+     CASE
+       WHEN Price < 20 THEN '저가'
+       WHEN Price BETWEEN 20 AND 30 THEN '일반'
+       ELSE '고가'
+     END
+   FROM Products;
+   ```
+
+3. `IFNULL(A, B)`: A가 NULL이면 B 반환
+
+
+
+### 6. 그룹으로 묶기
+
+1. `GROUP BY`: 조건에 따라 집계
+
+   ```mysql
+   SELECT
+     ProductID,
+     SUM(Quantity) AS QuantitySum
+   FROM OrderDetails
+   GROUP BY ProductID
+   ORDER BY QuantitySum DESC;
+   
+   SELECT
+     CategoryID,
+     MAX(Price) AS MaxPrice, 
+     MIN(Price) AS MinPrice,
+     TRUNCATE((MAX(Price) + MIN(Price)) / 2, 2) AS MedianPrice,
+     TRUNCATE(AVG(Price), 2) AS AveragePrice
+   FROM Products
+   GROUP BY CategoryID;
+   ```
+
+2. `WITH ROLLUP`: 집계 후에 맨 밑에 총합 표시
+
+   - `ORDER BY`와 함께 사용 불가능
+
+3. `HAVING`: 그룹화된 데이터 걸러내기
+
+   - `WHERE`는 그룹화 하기 전, `HAVING`은 그룹 후 집계에 사용
+
+   ```mysql
+   SELECT
+     COUNT(*) AS Count, OrderDate
+   FROM Orders
+   WHERE OrderDate > DATE('1996-12-31')
+   GROUP BY OrderDate
+   HAVING Count > 2;
+   ```
+
+4. `DISTINCT`: 중복된 값들 제거
+
+   - `GROUP BY`와 달리 집계함수를 사용할 수 없고, 정렬하지 않기 때문에 더 빠름
+
+   ```mysql
+   SELECT DISTINCT CategoryID
+   FROM Products;
+   -- GROUP BY를 사용한 쿼리와 결과 비교
+   
+   SELECT COUNT DISTINCT CategoryID
+   FROM Products;
+   -- 오류 발생
+   
+   -- GROUP BY와 함께 사용
+   SELECT
+     Country,
+     COUNT(DISTINCT CITY)
+   FROM Customers
+   GROUP BY Country;
+   ```
+
+   
+
+### 7. 서브 쿼리
+
+> 쿼리문 안에서 사용되는 또 다른 쿼리문
+
+1. 비상관 서브 쿼리
+
+   - 서브 쿼리가 외부 뭐리를 참조하지 않고 단독적으로 사용
+
+   | 연산자             | 의미                                                         |
+   | ------------------ | ------------------------------------------------------------ |
+   | ~ **ALL**~ **ANY** | 서브쿼리의 **모든** 결과에 대해 ~하다서브쿼리의 **하나 이상의** 결과에 대해 ~하다 |
+   | ~ **ANY**          | 서브쿼리의 **하나 이상의** 결과에 대해 ~하다                 |
+
+   ```mysql
+   SELECT * FROM Products
+   WHERE Price < (
+     SELECT AVG(Price) FROM Products
+   );
+   -- 서브 쿼리에서 하나의 값을 반환하고 이 값을 외부 쿼리에서 사용
+   
+   SELECT
+     CategoryID, CategoryName, Description
+   FROM Categories
+   WHERE
+     CategoryID IN
+     (SELECT CategoryID FROM Products
+     WHERE Price > 50);
+   -- 서브 쿼리에서 여러 개의 값을 반환하고 이 값들을 외부 쿼리에서 사용
+   
+   SELECT * FROM Products
+   WHERE Price > ALL (
+     SELECT Price FROM Products
+     WHERE CategoryID = 2
+   );
+   -- 서브 쿼리의 모든 결과와 비교해 참인 경우
+   
+   SELECT
+     CategoryID, CategoryName, Description
+   FROM Categories
+   WHERE
+     CategoryID = ANY
+     (SELECT CategoryID FROM Products
+     WHERE Price > 50);
+   -- 서브 쿼리의 한 이상의 결과와 비교해 참인 경우
+   ```
+
+   
+
+2. 상관 서브 쿼리
+
+   - 서브 쿼리의 값이 결정되는데 외부 쿼리에 의존
+   - `EXITS`: 
+     - 서브쿼리의 결과가 한 건이라도 존재하면 TRUE
+     - `IN`연산자와 같은 결과를 반환하지만 `IN`연산자는 서브쿼리 결과를 모두 수행하고, `EXISTS`는 일치하는 결과가 있으면 더 이상 수행하지 않기 때문에 더 효율적
+     - 따라서 단순히 특정 컬럼의 값을 이용할 때는 `IN`연산자를 사용하고 서브쿼리의 결과를 이용할 때는 `EXISTS`를 이용
+   - `NOT EXISTS`
+     - 서브쿼리의 결과가 존재하지 않으면 TRUE
+
+   ```mysql
+   SELECT
+     CategoryID, CategoryName,
+     (
+       SELECT MAX(Price) FROM Products P
+       WHERE P.CategoryID = C.CategoryID
+     ) AS MaximumPrice,
+     (
+       SELECT AVG(Price) FROM Products P
+       WHERE P.CategoryID = C.CategoryID
+     ) AS AveragePrice
+   FROM Categories C;
+   
+   
+   SELECT
+     CategoryID, CategoryName
+     -- ,(SELECT MAX(P.Price) FROM Products P
+     -- WHERE P.CategoryID = C.CategoryID
+     -- ) AS MaxPrice
+   FROM Categories C
+   WHERE EXISTS (
+     SELECT * FROM Products P
+     WHERE P.CategoryID = C.CategoryID
+     AND P.Price > 80
+   );
+   ```
+
+   
+
+### 8. JOIN
+
+1. **INNER JOIN**
+
+   - 양쪽 모두 값이 있는 행 반환
+
+   ```mysql
+   SELECT 
+     C.CategoryID, C.CategoryName, 
+     P.ProductName, 
+     O.OrderDate,
+     D.Quantity
+   FROM Categories C
+   JOIN Products P 
+     ON C.CategoryID = P.CategoryID
+   JOIN OrderDetails D
+     ON P.ProductID = D.ProductID
+   JOIN Orders O
+     ON O.OrderID = D.OrderID;
+   ```
+
+   
+
+2. **LEFT/RIGHT OUTER JOIN**
+
+   - 반대쪽에 데이터가 없더라도 선택된 방향에 데이터가 있는 모든 행 반환
+
+   ```mysql
+   SELECT
+     E1.EmployeeID, CONCAT_WS(' ', E1.FirstName, E1.LastName) AS Employee,
+     E2.EmployeeID, CONCAT_WS(' ', E2.FirstName, E2.LastName) AS NextEmployee
+   FROM Employees E1
+   LEFT JOIN Employees E2
+   ON E1.EmployeeID + 1 = E2.EmployeeID
+   ORDER BY E1.EmployeeID;
+   
+   -- LEFT를 RIGHT로 바꿔서도 실행해 볼 것
+   ```
+
+   
+
+3. **CROSS JOIN**
+
+   - 조건 없이 모든 조합 반환
