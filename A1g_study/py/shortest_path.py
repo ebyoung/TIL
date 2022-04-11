@@ -67,7 +67,8 @@ print(dist[B])
 '''
 
 # 17472
-''''''
+'''
+다시풀기
 from collections import deque
 
 
@@ -93,4 +94,71 @@ for i in range(N):
         if array[i][j] == 1:
             bfs((i, j), num)
             num += 1
+'''
 
+# 1238
+'''
+import heapq
+
+N, M, X = map(int, input().split())
+graph = [[] for _ in range(N+1)]
+graph_inv = [[] for _ in range(N+1)]
+for _ in range(M):
+    s, e, t = map(int, input().split())
+    graph[s].append((e, t))
+    graph_inv[e].append((s, t))
+
+heap = []
+dist_go = [int(1e6)] * (N + 1)
+visited = [0] * (N + 1)
+heapq.heappush(heap, (0, X))
+while heap:
+    w, v = heapq.heappop(heap)
+    if not visited[v]:
+        dist_go[v] = w
+        visited[v] = 1
+        for x, t in graph[v]:
+            if not visited[x]:
+                heapq.heappush(heap, (min(dist_go[x], dist_go[v] + t), x))
+
+heap = []
+dist_back = [int(1e6)] * (N + 1)
+visited = [0] * (N + 1)
+heapq.heappush(heap, (0, X))
+while heap:
+    w, v = heapq.heappop(heap)
+    if not visited[v]:
+        dist_back[v] = w
+        visited[v] = 1
+        for x, t in graph_inv[v]:
+            if not visited[x]:
+                heapq.heappush(heap, (min(dist_back[x], dist_back[v] + t), x))
+
+print(max(list(map(sum, zip(dist_go, dist_back)))[1:]))
+'''
+
+# 1261
+'''
+import heapq
+
+M, N = map(int, input().split())
+array = [list(map(int, input())) for _ in range(N)]
+visited = [[0] * M for _ in range(N)]
+visited[0][0] = 1
+dxy = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+heap = [(0, 0, 0)]
+
+while heap:
+    w, cy, cx = heapq.heappop(heap)
+    if (cy, cx) == (N - 1, M - 1):
+        break
+
+    for d in dxy:
+        ny = cy + d[0]
+        nx = cx + d[1]
+        if 0 <= ny < N and 0 <= nx < M and not visited[ny][nx]:
+            visited[ny][nx] = visited[cy][cx] + array[ny][nx]
+            heapq.heappush(heap, (visited[ny][nx], ny, nx))
+
+print(visited[N-1][M-1]-1)
+'''
