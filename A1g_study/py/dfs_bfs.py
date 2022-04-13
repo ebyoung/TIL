@@ -124,3 +124,31 @@ answer = bfs((0, 0, 0))
 print(answer)
 '''
 
+# 7562
+'''
+from collections import deque
+
+T = int(input())
+for _ in range(T):
+    l = int(input())
+    s = tuple(map(int, input().split()))
+    g = tuple(map(int, input().split()))
+    dxy = [(i, j) for i in [-2, -1, 1, 2] for j in [-2, -1, 1, 2] if abs(i) != abs(j)]
+    visited = [[0] * l for _ in range(l)]
+    queue = deque([s])
+    while queue:
+        v = queue.popleft()
+        if v == g:
+            print(visited[v[0]][v[1]])
+            break
+
+        for d in dxy:
+            ny = v[0] + d[0]
+            nx = v[1] + d[1]
+            if 0 <= ny < l and 0 <= nx < l and not visited[ny][nx]:
+                visited[ny][nx] = visited[v[0]][v[1]] + 1
+                queue.append((ny, nx))
+'''
+
+
+

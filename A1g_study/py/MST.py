@@ -38,3 +38,35 @@ kruskal()
 print(answer)
 '''
 
+# 1922
+'''
+def find_set(x):
+    if parents[x] != x:
+        parents[x] = find_set(parents[x])
+    return parents[x]
+
+
+def union(x, y):
+    parents[find_set(y)] = parents[x]
+
+
+def kruskal():
+    answer = 0
+    edge_count = idx = 0
+    while edge_count < N - 1:
+        x, y = edges[idx][:2]
+        if find_set(x) != find_set(y):
+            union(x, y)
+            edge_count += 1
+            answer += edges[idx][2]
+        idx += 1
+    return answer
+
+
+N = int(input())
+M = int(input())
+edges = [tuple(map(int, input().split())) for _ in range(M)]
+edges.sort(key=lambda x: x[2])
+parents = list(range(N+1))
+print(kruskal())
+'''
