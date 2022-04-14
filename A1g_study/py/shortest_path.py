@@ -162,3 +162,59 @@ while heap:
 
 print(visited[N-1][M-1]-1)
 '''
+
+# 22955
+import heapq
+
+
+def escape(start, end):
+    heap = [(0, *start)]
+    visited = [[10*N*M] * M for _ in range(N)]
+    while heap:
+        dist, cy, cx = heapq.heappop(heap)
+        visited[cy][cx] = dist
+        if (cy, cx) == end:
+            print(visited)
+            return visited[cy][cx]
+
+        for d in [-1, 1]:
+            nx = cx + d
+            if 0 <= cy < N and 0 <= nx < M:
+                if array[cy][nx] in ['F', 'L', 'E']:
+                    if visited[cy][nx] > dist + 1:
+                        heapq.heappush(heap, (dist+1, cy, nx))
+                if array[cy][nx] == 'X':
+                    ny = cy + 1
+                    while array[ny][nx] == 'X':
+                        ny += 1
+                    if visited[ny][nx] > dist + 11 and array[ny][nx] != 'D':
+                        heapq.heappush(heap, (dist+11, ny, nx))
+        if array[cy][cx] == 'L':
+            ny = cy - 1
+            if 0 <= ny < N and array[ny][cx] != 'D':
+                if visited[ny][cx] > dist + 5:
+                    heapq.heappush(heap, (dist+5, ny, cx))
+        ny = cy + 1
+        if 0 <= ny < N:
+            if array[ny][cx] == 'L' and array[cy][cx] != 'X':
+                if visited[ny][cx] > dist + 5:
+                    heapq.heappush(heap, (dist+5, ny, cx))
+
+    return 'dodo sad'
+
+
+
+N, M = map(int, input().split())
+array = [list(input()) for _ in range(N)]
+start = 0
+end = 0
+for i in range(N):
+    for j in range(M):
+        if array[i][j] == 'C':
+            start = (i, j)
+        if array[i][j] == 'E':
+            end = (i, j)
+    if start and end:
+        break
+
+print(escape(start, end))
