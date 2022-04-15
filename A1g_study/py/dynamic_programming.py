@@ -218,7 +218,7 @@ print(dp[x])
 '''
 
 # 2156
-''''''
+'''
 n = int(input())
 data = [int(input()) for _ in range(n)]
 dp = [0] * n
@@ -231,3 +231,18 @@ for i in range(3, n):
     dp[i] = max(dp[i-3] + data[i] + data[i-1], dp[i-2] + data[i], dp[i-1])
 
 print(dp[-1])
+'''
+
+# 12865
+''''''
+N, K = map(int, input().split())
+data = [[0, 0]] + [list(map(int, input().split())) for _ in range(N)]
+dp = [[0] * (K + 1) for _ in range(N+1)]
+for i in range(1, N+1):
+    for j in range(1, K+1):
+        w, v = data[i]
+        if j < w:
+            dp[i][j] = dp[i-1][j]
+        else:
+            dp[i][j] = max(dp[i-1][j], dp[i-1][j-w] + v)
+print(dp[N][K])
