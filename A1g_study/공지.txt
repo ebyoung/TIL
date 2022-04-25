@@ -1,7 +1,7 @@
 오늘의 알고리즘 스터디💯
 
 오늘의 문제🤔
-https://www.acmicpc.net/problem/15686
+https://www.acmicpc.net/problem/7569
 
 
 궁금한거 안되는거 질문
@@ -13,6 +13,12 @@ https://www.acmicpc.net/problem/17472
 https://www.acmicpc.net/problem/17779
 --------------------------------
 Solved
+https://www.acmicpc.net/problem/9663
+https://www.acmicpc.net/problem/14503
+https://www.acmicpc.net/problem/1774
+https://www.acmicpc.net/problem/1647
+https://www.acmicpc.net/problem/4195
+https://www.acmicpc.net/problem/15686
 https://www.acmicpc.net/problem/12865
 https://www.acmicpc.net/problem/1922
 https://www.acmicpc.net/problem/2156
