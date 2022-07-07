@@ -64,4 +64,5 @@
 - JavaScript
   - [Javscript이론](./Front-end-study/JavaScript/Javascript이론.md): 드림코딩 무료강의 들으며 정리
 - React
-  - [만들면서 학습하는 리액트](./Front-end-study/React/만들면서 학습하는 리액트): 리액트 기본개념 정리된 블로그 내용
+  - [만들면서 학습하는 리액트](./Front-end-study/React/만들면서_학습하는_리액트): 리액트 기본개념 정리된 블로그 내용
+
