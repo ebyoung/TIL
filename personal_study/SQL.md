@@ -386,7 +386,7 @@ GROUP BY last_name;
 5. 원하는 만큼만 데이터 가져오기
 
    - `LIMIT <가져올 갯수>`
-   - `LIMIT <건너뛸 갯수> <가져올 갯수>`
+   - `LIMIT <건너뛸 갯수>, <가져올 갯수>`
 
 6. 원하는 별명(alias)으로 데이터 가져오기
 
@@ -821,3 +821,22 @@ GROUP BY last_name;
 3. **CROSS JOIN**
 
    - 조건 없이 모든 조합 반환
+
+
+
+### 9. WITH RECURSIVE
+
+> 재귀 쿼리를 이용하여 실제로 테이블을 생성하거나 데이터 삽입(INSERT)을 하지 않고 가상 테이블을 생성
+
+```mysql
+WITH RECURSIVE <테이블명> AS (
+  SELECT <초기값> AS <컬럼명1>
+  UNION ALL
+  SELECT <컬럼명1 계산식>
+  FROM <테이블명>
+  WHERE <제어문>
+)
+```
+
+
+
