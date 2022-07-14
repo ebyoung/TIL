@@ -1,7 +1,7 @@
 내일의 알고리즘 스터디💯
 
 이번에 풀어볼 문제🤔
-https://www.acmicpc.net/problem/14719
+
 
 
 궁금한거 안되는거 질문
@@ -9,10 +9,14 @@ https://www.acmicpc.net/problem/14719
 
 --------------------------------
 Problem stack
-https://www.acmicpc.net/problem/2812
-https://www.acmicpc.net/problem/17406
+
 --------------------------------
 Solved
+https://www.acmicpc.net/problem/25330
+https://www.acmicpc.net/problem/19238
+https://www.acmicpc.net/problem/17406
+https://www.acmicpc.net/problem/2812
+https://www.acmicpc.net/problem/14719
 https://www.acmicpc.net/problem/17244
 https://www.acmicpc.net/problem/2174
 https://www.acmicpc.net/problem/25331
