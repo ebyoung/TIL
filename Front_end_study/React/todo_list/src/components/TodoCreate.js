@@ -109,7 +109,7 @@ function TodoCreate() {
               autoFocus
               placeholder="할 일 입력 후 Enter"
               onChange={onChange}
-              valu={value}
+              value={value}
             />
           </InsertForm>
         </InsertFormPositioner>
