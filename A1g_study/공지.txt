@@ -1,7 +1,7 @@
 내일의 알고리즘 스터디💯
 
 이번에 풀어볼 문제🤔
-
+https://www.acmicpc.net/problem/18405
 
 
 궁금한거 안되는거 질문
